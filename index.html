@@ -84,6 +84,8 @@ td.team-name{white-space:nowrap;}
   .name-full{display:none;}
   .name-mobile{display:inline;}
 }
+body.is-phone .name-full,html.is-phone-html .name-full{display:none;}
+body.is-phone .name-mobile,html.is-phone-html .name-mobile{display:inline;}
 .team-chip{display:inline-flex;align-items:center;gap:6px;}
 .team-chip .team-logo{width:20px;height:20px;}
 .logo-upload-btn{cursor:pointer;font-size:12px;padding:2px 3px;color:var(--muted);}
@@ -147,6 +149,17 @@ input[type=number]{width:60px;text-align:center;}
 `;
 
 document.head.insertAdjacentHTML('beforeend', FONT_LINKS + '<style>' + STYLE_CSS + '</style>');
+
+try{
+  var __sw = (window.screen && (screen.width || screen.availWidth)) || window.innerWidth;
+  var __ua = navigator.userAgent || '';
+  var __isPhone = (__sw && __sw <= 560) || /iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry|Opera Mini/i.test(__ua);
+  if(__isPhone) document.documentElement.classList.add('is-phone-html');
+  document.addEventListener('DOMContentLoaded', function(){
+    if(__isPhone) document.body.classList.add('is-phone');
+  });
+  if(document.body && __isPhone) document.body.classList.add('is-phone');
+}catch(e){}
 
 function uid(p){ return p + '_' + Math.random().toString(36).slice(2,9); }
 
