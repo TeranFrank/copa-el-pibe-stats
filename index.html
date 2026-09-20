@@ -166,16 +166,13 @@ input[type=number]{width:60px;text-align:center;}
 document.head.insertAdjacentHTML('beforeend', FONT_LINKS + '<style>' + STYLE_CSS + '</style>');
 
 try{
-  var __sw = (window.screen && (screen.width || screen.availWidth)) || window.innerWidth;
   var __ua = navigator.userAgent || '';
-  var __uaMobile = /iPhone|iPod|Android|Mobile|Windows Phone|BlackBerry|Opera Mini|Tablet|iPad/i.test(__ua);
-  var __coarsePointer = false;
-  try{ __coarsePointer = window.matchMedia && window.matchMedia('(pointer:coarse)').matches; }catch(e2){}
-  var __hasFinePointer = false;
-  try{ __hasFinePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches; }catch(e3){}
-  // Default assumption is "phone" (abbreviated names). Only mark as desktop when
-  // we are confident: a wide physical screen, a mouse-like pointer, and no mobile UA string.
-  var __isDesktop = (!__uaMobile) && (__hasFinePointer || !__coarsePointer) && __sw && __sw >= 900;
+  var __uaMobile = /iPhone|iPod|Android|Mobile|Windows Phone|BlackBerry|Opera Mini|IEMobile|iPad|Macintosh.*Mobile/i.test(__ua)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPadOS reports as Mac but has touch
+  // UA is immune to iframe/webview viewport tricks (unlike screen.width or matchMedia,
+  // which some in-app browsers like WhatsApp's report incorrectly). Default is "phone"
+  // (abbreviated names); only mark as desktop when the UA clearly is not a mobile device.
+  var __isDesktop = !__uaMobile;
   if(__isDesktop) document.documentElement.classList.add('is-desktop-html');
 }catch(e){}
 
