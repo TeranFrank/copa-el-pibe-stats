@@ -66,10 +66,12 @@ table.table-compact{width:auto;margin:0 auto;}
 table.table-compact td,table.table-compact th{white-space:nowrap;}
 table.table-compact td:nth-child(2),table.table-compact th:nth-child(2){padding-right:18px;}
 .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-.team-logo,.team-logo-sm,.team-logo-md{border-radius:9px;object-fit:contain;display:inline-block;vertical-align:middle;background:var(--panel-2);border:1px solid var(--line);flex:none;box-shadow:0 1px 3px rgba(0,0,0,.35);}
+.team-logo,.team-logo-sm,.team-logo-md,.team-logo-lg{border-radius:9px;object-fit:contain;display:inline-block;vertical-align:middle;background:var(--panel-2);border:1px solid var(--line);flex:none;box-shadow:0 1px 3px rgba(0,0,0,.35);}
 .team-logo{width:56px;height:56px;padding:3px;}
 .team-logo-sm{width:44px;height:44px;padding:3px;}
 .team-logo-md{width:64px;height:64px;padding:4px;}
+.team-logo-lg{width:84px;height:84px;padding:5px;border-radius:12px;}
+.avatar-fallback.team-logo-lg{font-size:22px;padding:0;}
 .avatar-fallback{display:inline-flex;align-items:center;justify-content:center;background:var(--panel-2);color:var(--accent);font-family:'Oswald',sans-serif;font-weight:600;border:1px solid var(--line);border-radius:9px;}
 .avatar-fallback.team-logo{font-size:16px;padding:0;}
 .avatar-fallback.team-logo-sm{font-size:13px;padding:0;}
@@ -79,17 +81,19 @@ td.team-name{white-space:nowrap;}
 .equipo-col{display:flex;align-items:center;gap:7px;min-width:0;}
 .equipo-col span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:170px;}
 .equipo-col.right{flex-direction:row-reverse;text-align:right;}
-.name-mobile{display:none;}
-@media (max-width:560px){
-  .name-full{display:none;}
-  .name-mobile{display:inline;}
-}
-body.is-phone .name-full,html.is-phone-html .name-full{display:none;}
-body.is-phone .name-mobile,html.is-phone-html .name-mobile{display:inline;}
+.name-full{display:none;}
+.name-mobile{display:inline;}
+html.is-desktop-html .name-full{display:inline;}
+html.is-desktop-html .name-mobile{display:none;}
 .team-chip{display:inline-flex;align-items:center;gap:6px;}
 .team-chip .team-logo{width:20px;height:20px;}
 .logo-upload-btn{cursor:pointer;font-size:12px;padding:6px 10px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:4px;}
 .logo-upload-btn:hover{border-color:var(--accent);}
+.bracket-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:8px;}
+.cruce-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 10px;display:flex;align-items:center;justify-content:center;gap:14px;}
+.cruce-team{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.cruce-team .seed{font-family:'Oswald',sans-serif;font-size:11px;color:var(--muted);letter-spacing:.04em;}
+.cruce-vs{font-family:'Oswald',sans-serif;font-size:12px;color:var(--accent);font-weight:600;}
 .team-edit-row{border-top:1px solid var(--line);padding:12px 0;}
 .team-edit-row:first-of-type{border-top:none;padding-top:0;}
 .team-edit-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
@@ -103,8 +107,13 @@ tr.top3{background:linear-gradient(90deg, rgba(245,179,1,.08), transparent);}
 .team-name{font-family:'Oswald',sans-serif;font-weight:500;}
 .fecha-block{margin-bottom:26px;}
 .fecha-title{font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 8px;border-bottom:1px solid var(--line);padding-bottom:6px;}
-.partido{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0 2px;border-bottom:1px solid var(--line);}
-.fecha-block .partido:last-of-type{border-bottom:none;}
+.partido-wrap{padding:12px 0;border-bottom:1px solid var(--line);}
+.fecha-block .partido-wrap:last-child{border-bottom:none;padding-bottom:0;}
+.partido{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.partido-events{display:flex;justify-content:space-between;gap:14px;margin-top:8px;}
+.events-col{flex:1;min-width:0;font-size:12px;color:var(--muted);}
+.events-col.right{text-align:right;}
+.event-line{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.6;}
 .equipo-col{flex:1;font-family:'Oswald',sans-serif;font-size:16px;}
 .equipo-col.right{text-align:right;}
 .score{font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:600;min-width:74px;text-align:center;color:var(--accent);}
@@ -159,12 +168,15 @@ document.head.insertAdjacentHTML('beforeend', FONT_LINKS + '<style>' + STYLE_CSS
 try{
   var __sw = (window.screen && (screen.width || screen.availWidth)) || window.innerWidth;
   var __ua = navigator.userAgent || '';
-  var __isPhone = (__sw && __sw <= 560) || /iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry|Opera Mini/i.test(__ua);
-  if(__isPhone) document.documentElement.classList.add('is-phone-html');
-  document.addEventListener('DOMContentLoaded', function(){
-    if(__isPhone) document.body.classList.add('is-phone');
-  });
-  if(document.body && __isPhone) document.body.classList.add('is-phone');
+  var __uaMobile = /iPhone|iPod|Android|Mobile|Windows Phone|BlackBerry|Opera Mini|Tablet|iPad/i.test(__ua);
+  var __coarsePointer = false;
+  try{ __coarsePointer = window.matchMedia && window.matchMedia('(pointer:coarse)').matches; }catch(e2){}
+  var __hasFinePointer = false;
+  try{ __hasFinePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches; }catch(e3){}
+  // Default assumption is "phone" (abbreviated names). Only mark as desktop when
+  // we are confident: a wide physical screen, a mouse-like pointer, and no mobile UA string.
+  var __isDesktop = (!__uaMobile) && (__hasFinePointer || !__coarsePointer) && __sw && __sw >= 900;
+  if(__isDesktop) document.documentElement.classList.add('is-desktop-html');
 }catch(e){}
 
 function uid(p){ return p + '_' + Math.random().toString(36).slice(2,9); }
@@ -301,6 +313,20 @@ function renderStandings(state){
     + '<th class="num">DG</th><th class="num">Pts</th></tr></thead><tbody>'+body+'</tbody></table></div>';
 }
 
+function buildEventsCol(p, equipoId){
+  var goles = (p.goleadores||[]).filter(function(g){ return g.equipoId===equipoId; })
+    .slice().sort(function(a,b){ return (Number(b.cantidad)||1) - (Number(a.cantidad)||1); });
+  var tarjetas = (p.tarjetas||[]).filter(function(t){ return t.equipoId===equipoId; });
+  var lines = [];
+  goles.forEach(function(g){
+    lines.push('<div class="event-line">⚽ '+escapeHtml(g.jugador)+(g.cantidad>1?' x'+g.cantidad:'')+'</div>');
+  });
+  tarjetas.forEach(function(t){
+    lines.push('<div class="event-line"><span class="badge '+t.tipo+'"></span>'+escapeHtml(t.jugador)+'</div>');
+  });
+  return lines.join('');
+}
+
 function renderFixtures(state){
   var fechas = state.fechas||[];
   if(!fechas.length) return '<p class="empty">Todavía no hay partidos cargados.</p>';
@@ -313,23 +339,23 @@ function renderFixtures(state){
       var scoreHtml = jugado
         ? '<span class="score">'+p.golesLocal+' — '+p.golesVisitante+'</span>'
         : '<span class="score pending">vs</span>';
-      var eventos = [];
-      (p.goleadores||[]).forEach(function(g){
-        eventos.push(escapeHtml(g.jugador)+' ⚽'+(g.cantidad>1?' x'+g.cantidad:''));
-      });
-      (p.tarjetas||[]).forEach(function(t){
-        eventos.push('<span class="badge '+t.tipo+'"></span>'+escapeHtml(t.jugador));
-      });
-      var eventosHtml = eventos.length ? '<div class="events-line">'+eventos.join(' · ')+'</div>' : '<div style="margin-bottom:10px"></div>';
       var localLabel = local ? (local.nombreCorto || local.nombre) : '?';
       var visitLabel = visit ? (visit.nombreCorto || visit.nombre) : '?';
       var localMobil = local ? (local.nombreMobil || localLabel) : '?';
       var visitMobil = visit ? (visit.nombreMobil || visitLabel) : '?';
-      return '<div class="partido">'
+      var localEvents = buildEventsCol(p, p.localId);
+      var visitEvents = buildEventsCol(p, p.visitanteId);
+      var eventsHtml = (localEvents || visitEvents) ? (
+        '<div class="partido-events">'
+        + '<div class="events-col">'+localEvents+'</div>'
+        + '<div class="events-col right">'+visitEvents+'</div>'
+        + '</div>'
+      ) : '';
+      return '<div class="partido-wrap"><div class="partido">'
         + '<div class="equipo-col">'+teamAvatar(local,'team-logo-sm')+'<span class="name-full">'+escapeHtml(localLabel)+'</span><span class="name-mobile">'+escapeHtml(localMobil)+'</span></div>'
         + scoreHtml
         + '<div class="equipo-col right">'+teamAvatar(visit,'team-logo-sm')+'<span class="name-full">'+escapeHtml(visitLabel)+'</span><span class="name-mobile">'+escapeHtml(visitMobil)+'</span></div>'
-        + '</div>' + eventosHtml;
+        + '</div>' + eventsHtml + '</div>';
     }).join('');
     return '<div class="fecha-block"><h3 class="fecha-title">Fecha '+f.numero+'</h3>'+(partidos||'<p class="empty">Sin partidos.</p>')+'</div>';
   }).join('');
@@ -361,6 +387,49 @@ function renderCards(state){
       + '<td class="num">'+s.amarillas+'</td><td class="num">'+s.rojas+'</td></tr>';
   }).join('');
   return '<div class="tablewrap"><table class="table-compact"><thead><tr><th class="num">#</th><th>Jugador</th><th>Equipo</th><th class="num">Am.</th><th class="num">Roj.</th></tr></thead><tbody>'+body+'</tbody></table></div>';
+}
+
+function renderCruce(teamObj, rowA, seedA, rowB, seedB){
+  var teamA = rowA ? teamObj[rowA.id] : null;
+  var teamB = rowB ? teamObj[rowB.id] : null;
+  return '<div class="cruce-card">'
+    + '<div class="cruce-team"><span class="seed">'+seedA+'°</span>'+teamAvatar(teamA,'team-logo-lg')+'</div>'
+    + '<div class="cruce-vs">VS</div>'
+    + '<div class="cruce-team"><span class="seed">'+seedB+'°</span>'+teamAvatar(teamB,'team-logo-lg')+'</div>'
+    + '</div>';
+}
+
+function renderLiguilla(state){
+  var standings = computeStandings(state);
+  if(standings.length < 2){
+    return '<p class="empty">Todavía no hay suficientes equipos en la tabla para armar la liguilla.</p>';
+  }
+  var teamObj = {};
+  (state.equipos||[]).forEach(function(e){ teamObj[e.id]=e; });
+
+  var big = standings.slice(0,8);
+  var small = standings.slice(8);
+  var html = '';
+
+  html += '<h3 class="fecha-title">Liguilla grande (1° al 8°)</h3>';
+  if(big.length < 8){
+    html += '<p class="empty">Se arma cuando haya al menos 8 equipos en la tabla (hay '+standings.length+').</p>';
+  } else {
+    var pairs = [[0,7],[1,6],[2,5],[3,4]];
+    html += '<div class="bracket-grid">' + pairs.map(function(pr){
+      return renderCruce(teamObj, big[pr[0]], pr[0]+1, big[pr[1]], pr[1]+1);
+    }).join('') + '</div>';
+  }
+
+  html += '<h3 class="fecha-title" style="margin-top:26px">Liguilla chica (9° y 10°)</h3>';
+  if(small.length < 2){
+    html += '<p class="empty">Se arma cuando haya al menos 10 equipos en la tabla.</p>';
+  } else {
+    html += '<div class="bracket-grid">' + renderCruce(teamObj, small[0], 9, small[small.length-1], 8+small.length) + '</div>';
+  }
+
+  html += '<p class="empty" style="padding-top:18px">Cruces según la posición actual en la tabla; pueden cambiar hasta que termine la fase de grupos.</p>';
+  return html;
 }
 
 function renderPartidoAdmin(state, f, p){
@@ -451,6 +520,7 @@ function render(){
   var tabsList = [
     ['posiciones','Posiciones'],
     ['partidos','Partidos'],
+    ['liguilla','Liguilla'],
     ['goleadores','Goleadores'],
     ['tarjetas','Tarjetas']
   ];
@@ -465,6 +535,7 @@ function render(){
   else if(TAB==='partidos') content = renderFixtures(STATE);
   else if(TAB==='goleadores') content = renderScorers(STATE);
   else if(TAB==='tarjetas') content = renderCards(STATE);
+  else if(TAB==='liguilla') content = renderLiguilla(STATE);
   else if(TAB==='admin') content = renderAdmin(STATE);
   else content = renderStandings(STATE);
 
