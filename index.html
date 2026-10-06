@@ -126,6 +126,12 @@ html.is-desktop-html .name-mobile{display:none;}
 .destacado-photo-wrap{position:relative;width:84px;height:84px;}
 .destacado-photo{width:84px;height:84px;border-radius:50%;object-fit:cover;display:block;border:3px solid var(--accent);box-shadow:0 0 16px rgba(111,207,61,.4);background:var(--panel-2);animation:logoPop .45s cubic-bezier(.34,1.56,.64,1) both;}
 .destacado-photo.placeholder{display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:24px;color:var(--muted);}
+.destacado-photo.capilla-silueta{padding:16px;box-sizing:border-box;color:var(--muted);border-color:var(--yellow);box-shadow:0 0 14px rgba(242,199,68,.35);}
+.capilla-banner{background:var(--panel);border:1px solid var(--yellow);border-radius:12px;padding:20px 16px;margin-bottom:24px;}
+.capilla-title{font-family:'Oswald',sans-serif;font-size:16px;text-transform:uppercase;letter-spacing:.04em;color:var(--yellow);margin:0 0 4px;}
+.capilla-sub{color:var(--muted);font-size:12px;margin:0 0 16px;}
+.capilla-card{display:flex;flex-direction:column;align-items:center;gap:6px;width:90px;}
+.capilla-count{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--yellow);}
 .destacado-team-badge{position:absolute;right:-6px;bottom:-6px;width:28px;height:28px;border-radius:8px;border:2px solid var(--bg);padding:2px;}
 .destacado-name{font-family:'Oswald',sans-serif;font-size:12.5px;text-align:center;text-transform:uppercase;letter-spacing:.02em;line-height:1.2;color:#fff;background:rgba(8,15,8,.65);padding:3px 8px;border-radius:4px;}
 .destacado-pos{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;background:rgba(8,15,8,.55);padding:2px 7px;border-radius:3px;}
@@ -441,6 +447,29 @@ function renderScorers(state){
   return '<div class="tablewrap"><table class="table-compact"><thead><tr><th class="num">#</th><th>Jugador</th><th>Equipo</th><th class="num">Goles</th></tr></thead><tbody>'+body+'</tbody></table></div>';
 }
 
+var PLAYER_SILHOUETTE_SVG = '<svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><circle cx="50" cy="36" r="19" fill="currentColor"/><path d="M50 60c-23 0-37 13-37 29v6h74v-6c0-16-14-29-37-29z" fill="currentColor"/></svg>';
+
+function renderCapillaBanner(state){
+  var rows = computeCards(state);
+  var enCapilla = rows.filter(function(r){ return r.amarillas>0 && r.amarillas%3===2; });
+  if(!enCapilla.length) return '';
+  var teamObj = {};
+  (state.equipos||[]).forEach(function(e){ teamObj[e.id]=e; });
+  var cards = enCapilla.map(function(r){
+    var team = teamObj[r.equipoId];
+    return '<div class="capilla-card">'
+      + '<div class="capilla-avatar-wrap"><div class="destacado-photo placeholder capilla-silueta">'+PLAYER_SILHOUETTE_SVG+'</div>'+teamAvatar(team,'destacado-team-badge')+'</div>'
+      + '<div class="destacado-name">'+escapeHtml(r.jugador)+'</div>'
+      + '<div class="capilla-count">'+r.amarillas+' amarillas</div>'
+      + '</div>';
+  }).join('');
+  return '<div class="capilla-banner">'
+    + '<h3 class="capilla-title">🟨 En capilla</h3>'
+    + '<p class="capilla-sub">A una amarilla de cumplir fecha de descanso</p>'
+    + '<div class="destacados-row">'+cards+'</div>'
+    + '</div>';
+}
+
 function renderCards(state){
   var rows = computeCards(state);
   if(!rows.length) return '<p class="empty">Todavía no hay tarjetas cargadas.</p>';
@@ -452,7 +481,8 @@ function renderCards(state){
       + '<td class="team-name">'+teamAvatar(t,'team-logo-md')+'</td>'
       + '<td class="num">'+s.amarillas+'</td><td class="num">'+s.rojas+'</td></tr>';
   }).join('');
-  return '<div class="tablewrap"><table class="table-compact"><thead><tr><th class="num">#</th><th>Jugador</th><th>Equipo</th><th class="num">Am.</th><th class="num">Roj.</th></tr></thead><tbody>'+body+'</tbody></table></div>';
+  return renderCapillaBanner(state)
+    + '<div class="tablewrap"><table class="table-compact"><thead><tr><th class="num">#</th><th>Jugador</th><th>Equipo</th><th class="num">Am.</th><th class="num">Roj.</th></tr></thead><tbody>'+body+'</tbody></table></div>';
 }
 
 function renderProximosPartidos(state){
