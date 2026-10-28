@@ -136,7 +136,7 @@ html.is-desktop-html .name-full{display:inline;}
 html.is-desktop-html .name-mobile{display:none;}
 .team-chip{display:inline-flex;align-items:center;gap:6px;}
 .team-chip .team-logo{width:20px;height:20px;}
-.logo-upload-btn{cursor:pointer;font-size:12px;padding:7px 12px;min-height:34px;display:inline-flex;align-items:center;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:4px;transition:border-color .15s ease,background .15s ease;}
+.logo-upload-btn{cursor:pointer;font-size:12px;padding:9px 12px;min-height:40px;display:inline-flex;align-items:center;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:4px;transition:border-color .15s ease,background .15s ease;}
 .logo-upload-btn:hover{border-color:var(--accent);background:var(--panel);}
 .logo-upload-btn:focus-within{outline:2px solid var(--accent);outline-offset:2px;}
 .bracket-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-2);margin-bottom:var(--space-1);}
@@ -179,8 +179,8 @@ html.is-desktop-html .name-mobile{display:none;}
 .destacado-pos{font-family:var(--font-mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;background:rgba(var(--bg-rgb),.55);padding:2px 7px;border-radius:3px;}
 .destacado-master-badge{font-family:var(--font-heading);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--yellow-ink);background:linear-gradient(135deg,var(--yellow-light),var(--yellow));padding:2px 8px;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.4);white-space:nowrap;}
 .destacados-formacion{font-family:var(--font-mono);font-size:12px;color:var(--yellow);letter-spacing:.05em;margin:2px 0 0;}
-.master-check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none;}
-.master-check input{accent-color:var(--yellow);width:17px;height:17px;cursor:pointer;}
+.master-check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none;padding:6px 0;min-height:40px;}
+.master-check input{accent-color:var(--yellow);width:20px;height:20px;cursor:pointer;flex:none;}
 .master-check input:focus-visible{outline:2px solid var(--yellow);outline-offset:2px;}
 .colabora-title{font-size:20px;margin-bottom:10px;}
 .colabora-msg{color:var(--muted);font-size:14px;max-width:480px;margin:0 auto;line-height:1.6;}
@@ -212,8 +212,22 @@ html.is-desktop-html .name-mobile{display:none;}
 th,td{padding:9px 8px;text-align:left;border-bottom:1px solid var(--line);}
 th{color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.04em;}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--font-mono);}
-tr.top3{background:linear-gradient(90deg, rgba(var(--accent-rgb),.12), transparent);}
 .team-name{font-family:var(--font-heading);font-weight:500;}
+table.table-standings td.num.col-secondary{color:var(--muted);}
+table.table-standings td.num.dg-pos{color:var(--accent);font-weight:600;}
+table.table-standings td.num.dg-neg{color:var(--red);font-weight:600;}
+table.table-standings .pts-badge{display:inline-block;min-width:26px;padding:3px 7px;border-radius:var(--radius-sm);background:rgba(var(--accent-rgb),.16);color:var(--accent);font-weight:800;}
+table.table-standings th.col-pts{color:var(--accent);}
+tr.zona-grande{background:linear-gradient(90deg, rgba(var(--accent-rgb),.12), transparent);}
+tr.zona-grande td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
+tr.zona-chica{background:linear-gradient(90deg, rgba(var(--yellow-rgb),.12), transparent);}
+tr.zona-chica td:first-child{box-shadow:inset 3px 0 0 var(--yellow);}
+tr.zona-chica:first-of-type td{border-top:1px dashed var(--line);}
+.standings-legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:10px 2px 0;font-family:var(--font-sans);font-size:12px;color:var(--muted);}
+.standings-legend .leg-item{display:inline-flex;align-items:center;gap:6px;}
+.standings-legend .leg-swatch{width:11px;height:11px;border-radius:3px;flex:none;}
+.standings-legend .leg-swatch.grande{background:var(--accent);}
+.standings-legend .leg-swatch.chica{background:var(--yellow);}
 .fecha-block{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-md);padding:var(--space-3) var(--space-3) 6px;margin-bottom:var(--space-4);}
 .fecha-block:last-child{margin-bottom:0;}
 .fecha-title{font-family:var(--font-heading);font-size:16px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin:0 0 14px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
@@ -237,7 +251,20 @@ tr.top3{background:linear-gradient(90deg, rgba(var(--accent-rgb),.12), transpare
 .badge{display:inline-block;width:9px;height:13px;border-radius:2px;margin-right:3px;vertical-align:-1px;}
 .badge.amarilla{background:var(--yellow);}
 .badge.roja{background:var(--red);}
-.empty{color:var(--muted);padding:20px 0;font-size:14px;}
+.empty{color:var(--muted);padding:14px 16px;font-size:14px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--silver);border-radius:var(--radius-sm);display:flex;gap:9px;align-items:flex-start;line-height:1.5;}
+.empty::before{content:'ℹ';flex:none;font-family:var(--font-heading);font-weight:700;font-size:13px;color:var(--muted);background:var(--panel-2);border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.empty .empty-hint{display:block;margin-top:4px;color:var(--accent);font-weight:600;}
+.toast-stack{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:80;display:flex;flex-direction:column;gap:8px;width:min(92vw,420px);pointer-events:none;}
+.toast{pointer-events:auto;display:flex;align-items:flex-start;gap:9px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--silver);border-radius:var(--radius-sm);padding:12px 14px;font-family:var(--font-sans);font-size:13px;color:var(--text);line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.45);animation:toastIn .25s cubic-bezier(.34,1.56,.64,1) both;}
+.toast.hide{animation:toastOut .2s ease forwards;}
+.toast::before{flex:none;font-family:var(--font-heading);font-weight:700;font-size:12px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.toast.info::before{content:'ℹ';background:var(--panel-2);color:var(--muted);}
+.toast.error{border-left-color:var(--red);background:linear-gradient(0deg, rgba(225,75,75,.1), rgba(225,75,75,.1)), var(--panel);}
+.toast.error::before{content:'!';background:var(--red);color:#fff;}
+.toast.success{border-left-color:var(--accent);background:linear-gradient(0deg, rgba(var(--accent-rgb),.12), rgba(var(--accent-rgb),.12)), var(--panel);}
+.toast.success::before{content:'✓';background:var(--accent);color:var(--accent-ink);}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes toastOut{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(6px);}}
 .btn{
   font-family:var(--font-sans);font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:13px;
   background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);padding:10px 18px;border-radius:var(--radius-sm);cursor:pointer;
@@ -250,7 +277,7 @@ tr.top3{background:linear-gradient(90deg, rgba(var(--accent-rgb),.12), transpare
 .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--line);}
 @media (hover:hover){ .btn.secondary:hover:not(:disabled){border-color:var(--accent);color:var(--accent);background:rgba(var(--accent-rgb),.08);} }
 .btn.secondary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-.btn.danger{background:transparent;color:var(--red);border:1px solid var(--red);padding:7px 12px;font-size:11px;min-height:34px;}
+.btn.danger{background:transparent;color:var(--red);border:1px solid var(--red);padding:9px 14px;font-size:11px;min-height:40px;}
 @media (hover:hover){ .btn.danger:hover:not(:disabled){background:var(--red);color:#fff;} }
 .btn.danger:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
 .btn:disabled{opacity:.4;cursor:default;transform:none;}
@@ -265,20 +292,20 @@ tr.top3{background:linear-gradient(90deg, rgba(var(--accent-rgb),.12), transpare
 .admin-box > summary + *{margin-top:0;}
 .admin-box > *:last-child{padding-bottom:var(--space-3);}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
-input[type=text],input[type=number],input[type=date],select{
+input[type=text],input[type=number],input[type=date],select,textarea{
   background:var(--panel-2);border:1px solid var(--line);color:var(--text);padding:9px 10px;border-radius:4px;font-family:var(--font-sans);font-size:13px;
   min-height:38px;transition:border-color .15s ease,background .15s ease;
 }
 @media (hover:hover){
-  input[type=text]:hover,input[type=number]:hover,input[type=date]:hover,select:hover{border-color:var(--muted);}
+  input[type=text]:hover,input[type=number]:hover,input[type=date]:hover,select:hover,textarea:hover{border-color:var(--muted);}
 }
-input[type=text]:focus,input[type=number]:focus,input[type=date]:focus,select:focus{
+input[type=text]:focus,input[type=number]:focus,input[type=date]:focus,select:focus,textarea:focus{
   outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent);background:var(--panel);
 }
-input[type=text]:disabled,input[type=number]:disabled,input[type=date]:disabled,select:disabled{opacity:.5;cursor:default;}
+input[type=text]:disabled,input[type=number]:disabled,input[type=date]:disabled,select:disabled,textarea:disabled{opacity:.5;cursor:default;}
 input[type=number]{width:60px;text-align:center;font-family:var(--font-mono);}
 .chip{display:inline-flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--line);padding:4px 8px;border-radius:20px;font-size:12px;margin:2px 4px 2px 0;}
-.chip button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;line-height:1;padding:2px;border-radius:3px;transition:color .15s ease,background .15s ease;}
+.chip button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;line-height:1;padding:7px;min-width:28px;min-height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:3px;transition:color .15s ease,background .15s ease;}
 @media (hover:hover){ .chip button:hover{color:var(--red);background:rgba(255,255,255,.08);} }
 .chip button:active{transform:scale(.9);}
 .chip button:focus-visible{outline:2px solid var(--accent);outline-offset:1px;}
@@ -299,7 +326,8 @@ input[type=number]{width:60px;text-align:center;font-family:var(--font-mono);}
     position:sticky;left:38px;z-index:2;background:var(--bg);
     box-shadow:2px 0 6px rgba(0,0,0,.28);
   }
-  .tablewrap table tr.top3 td:first-child,.tablewrap table tr.top3 td:nth-child(2){background:var(--panel-2);}
+  .tablewrap table tr.zona-grande td:first-child,.tablewrap table tr.zona-grande td:nth-child(2){background:var(--panel-2);}
+  .tablewrap table tr.zona-chica td:first-child,.tablewrap table tr.zona-chica td:nth-child(2){background:var(--panel-2);}
   .equipo-col span{max-width:96px;}
   .team-logo{width:46px;height:46px;}
   .team-logo-sm{width:38px;height:38px;}
@@ -341,6 +369,33 @@ try{
 }catch(e){}
 
 function uid(p){ return p + '_' + Math.random().toString(36).slice(2,9); }
+
+function showToast(message, type){
+  try{
+    var stack = document.getElementById('toast-stack');
+    if(!stack){
+      stack = document.createElement('div');
+      stack.id = 'toast-stack';
+      stack.className = 'toast-stack';
+      document.body.appendChild(stack);
+    }
+    var el = document.createElement('div');
+    el.className = 'toast ' + (type||'info');
+    el.setAttribute('role', type==='error' ? 'alert' : 'status');
+    el.textContent = message;
+    stack.appendChild(el);
+    var ms = type==='error' ? 6000 : 4000;
+    setTimeout(function(){
+      el.classList.add('hide');
+      setTimeout(function(){ el.remove(); }, 220);
+    }, ms);
+  }catch(e){}
+}
+
+function emptyMsg(text, adminHint){
+  var hint = (CAN_EDIT && adminHint) ? ('<span class="empty-hint">'+escapeHtml(adminHint)+'</span>') : '';
+  return '<p class="empty"><span>'+escapeHtml(text)+hint+'</span></p>';
+}
 
 function escapeHtml(s){
   return String(s==null?'':s).replace(/[&<>"']/g, function(c){
@@ -465,25 +520,40 @@ function computeCards(state){
 
 function renderStandings(state){
   var rows = computeStandings(state);
-  if(!rows.length) return '<p class="empty">Todavía no hay equipos cargados.</p>';
+  if(!rows.length) return emptyMsg('Todavía no hay equipos cargados.', 'Agregalos desde la pestaña Editar.');
   var haySancion = rows.some(function(t){ return t.sancion; });
+  var total = rows.length;
+  // Zonas reales de clasificación según la lógica de la liguilla (ver renderLiguilla):
+  // liguilla grande = 1° al 8°, liguilla chica = 9° en adelante (requiere al menos 10 equipos).
+  var showGrande = total >= 8;
+  var showChica = total >= 10;
   var body = rows.map(function(t,i){
-    return '<tr class="'+(i<3?'top3':'')+'">'
+    var zona = (showChica && i>=8) ? 'zona-chica' : ((showGrande && i<8) ? 'zona-grande' : '');
+    var dgClass = t.dg>0 ? 'dg-pos' : (t.dg<0 ? 'dg-neg' : '');
+    return '<tr class="'+zona+'">'
       + '<td class="num">'+(i+1)+'</td>'
       + '<td class="team-name"><div class="equipo-col">'+teamAvatar(t,'team-logo')+'<span class="name-full">'+escapeHtml(t.nombreCorto||t.nombre)+(t.sancion?' <strong title="Sanción administrativa">*</strong>':'')+'</span><span class="name-mobile">'+escapeHtml(t.nombreMobil||t.nombreCorto||t.nombre)+(t.sancion?' <strong title="Sanción administrativa">*</strong>':'')+'</span></div></td>'
-      + '<td class="num">'+t.pj+'</td>'
-      + '<td class="num">'+t.pg+'</td>'
-      + '<td class="num">'+t.pe+'</td>'
-      + '<td class="num">'+t.pp+'</td>'
-      + '<td class="num">'+t.gf+'</td>'
-      + '<td class="num">'+t.gc+'</td>'
-      + '<td class="num">'+(t.dg>0?'+':'')+t.dg+'</td>'
-      + '<td class="num"><strong>'+t.pts+'</strong></td>'
+      + '<td class="num col-secondary">'+t.pj+'</td>'
+      + '<td class="num col-secondary">'+t.pg+'</td>'
+      + '<td class="num col-secondary">'+t.pe+'</td>'
+      + '<td class="num col-secondary">'+t.pp+'</td>'
+      + '<td class="num col-secondary">'+t.gf+'</td>'
+      + '<td class="num col-secondary">'+t.gc+'</td>'
+      + '<td class="num '+dgClass+'">'+(t.dg>0?'+':'')+t.dg+'</td>'
+      + '<td class="num"><span class="pts-badge">'+t.pts+'</span></td>'
       + '</tr>';
   }).join('');
+  var leyenda = '';
+  if(showGrande){
+    leyenda = '<div class="standings-legend">'
+      + '<span class="leg-item"><span class="leg-swatch grande"></span>Liguilla grande: puestos 1° al 8°</span>'
+      + (showChica ? '<span class="leg-item"><span class="leg-swatch chica"></span>Liguilla chica: puestos 9° al '+total+'°</span>' : '')
+      + '</div>';
+  }
   return '<div class="tablewrap"><table class="table-standings"><thead><tr><th class="num">#</th><th>Equipo</th><th class="num">PJ</th><th class="num">PG</th>'
     + '<th class="num">PE</th><th class="num">PP</th><th class="num">GF</th><th class="num">GC</th>'
-    + '<th class="num">DG</th><th class="num">Pts</th></tr></thead><tbody>'+body+'</tbody></table></div>'
+    + '<th class="num">DG</th><th class="num col-pts">Pts</th></tr></thead><tbody>'+body+'</tbody></table></div>'
+    + leyenda
     + (haySancion ? '<p class="empty" style="padding-top:8px">* Sanción administrativa: puntos descontados en la tabla.</p>' : '');
 }
 
@@ -503,7 +573,7 @@ function buildEventsCol(p, equipoId){
 
 function renderFixtures(state){
   var fechas = (state.fechas||[]).slice().sort(function(a,b){ return (b.numero||0) - (a.numero||0); });
-  if(!fechas.length) return '<p class="empty">Todavía no hay resultados cargados.</p>';
+  if(!fechas.length) return emptyMsg('Todavía no hay resultados cargados.', 'Cargá los marcadores de los partidos jugados desde la pestaña Editar.');
   var teamObj = {};
   (state.equipos||[]).forEach(function(e){teamObj[e.id]=e;});
   var blocks = fechas.map(function(f){
@@ -532,13 +602,13 @@ function renderFixtures(state){
     }).join('');
     return '<div class="fecha-block"><h3 class="fecha-title">Fecha '+f.numero+'</h3>'+partidos+'</div>';
   }).filter(Boolean);
-  if(!blocks.length) return '<p class="empty">Todavía no hay resultados cargados.</p>';
+  if(!blocks.length) return emptyMsg('Todavía no hay resultados cargados.', 'Cargá los marcadores de los partidos jugados desde la pestaña Editar.');
   return blocks.join('');
 }
 
 function renderScorers(state){
   var rows = computeScorers(state);
-  if(!rows.length) return '<p class="empty">Todavía no hay goles cargados.</p>';
+  if(!rows.length) return emptyMsg('Todavía no hay goles cargados.', 'Se cargan desde cada partido en la pestaña Editar.');
   var teamObj = {};
   (state.equipos||[]).forEach(function(e){teamObj[e.id]=e;});
   var body = rows.map(function(s,i){
@@ -575,7 +645,7 @@ function renderCapillaBanner(state){
 
 function renderCards(state){
   var rows = computeCards(state);
-  if(!rows.length) return '<p class="empty">Todavía no hay tarjetas cargadas.</p>';
+  if(!rows.length) return emptyMsg('Todavía no hay tarjetas cargadas.', 'Se cargan desde cada partido en la pestaña Editar.');
   var teamObj = {};
   (state.equipos||[]).forEach(function(e){teamObj[e.id]=e;});
   var body = rows.map(function(s,i){
@@ -592,7 +662,7 @@ function renderProximosPartidos(state){
   var maxFechaCreada = (state.fechas||[]).reduce(function(m,f){ return Math.max(m, f.numero||0); }, 0);
   var total = state.totalFechas || maxFechaCreada;
   if(!total){
-    return '<p class="empty">Cargá el total de fechas del torneo desde "Editar" para armar esta vista.</p>';
+    return emptyMsg('Todavía no se definió el total de fechas del torneo.', 'Cargalo desde la pestaña Editar para armar esta vista.');
   }
   var teamObj = {};
   (state.equipos||[]).forEach(function(e){ teamObj[e.id]=e; });
@@ -612,7 +682,7 @@ function renderProximosPartidos(state){
   }).sort(function(a,b){ return a.numero-b.numero; });
 
   if(!fechas.length){
-    return '<p class="empty">Todavía no cargaste los cruces de las próximas fechas desde "Editar".</p>';
+    return emptyMsg('Todavía no hay próximos partidos cargados.', 'Cargá los cruces de las próximas fechas desde la pestaña Editar.');
   }
 
   return fechas.map(function(f){
@@ -724,7 +794,7 @@ function renderColabora(state){
       return '<div class="metodo-card"><div class="metodo-nombre">'+escapeHtml(m.nombre)+'</div><div class="metodo-valor">'+escapeHtml(m.valor)+'</div></div>';
     }).join('') + '</div>';
   } else {
-    html += '<p class="empty">Todavía no se cargaron formas de colaborar.</p>';
+    html += emptyMsg('Todavía no se cargaron formas de colaborar.', 'Agregalas desde la pestaña Editar.');
   }
   return html;
 }
@@ -753,11 +823,11 @@ function renderPartidoAdmin(state, f, p){
   var teamObjLocal = (state.equipos||[]).reduce(function(m,e){ m[e.id]=e; return m; }, {});
   var goleadoresHtml = (p.goleadores||[]).map(function(g,i){
     return '<span class="chip">⚽ '+escapeHtml(g.jugador)+(g.cantidad>1?' x'+g.cantidad:'')+' ('+escapeHtml(teamName[g.equipoId]||'?')+')'
-      + ' <button onclick="App.removeGol(\''+f.id+'\',\''+p.id+'\','+i+')">×</button></span>';
+      + ' <button aria-label="Quitar gol de '+escapeHtml(g.jugador)+'" onclick="App.removeGol(\''+f.id+'\',\''+p.id+'\','+i+')">×</button></span>';
   }).join('');
   var tarjetasHtml = (p.tarjetas||[]).map(function(t,i){
     return '<span class="chip"><span class="badge '+t.tipo+'"></span>'+escapeHtml(t.jugador)+' ('+escapeHtml(teamName[t.equipoId]||'?')+')'
-      + ' <button onclick="App.removeTarjeta(\''+f.id+'\',\''+p.id+'\','+i+')">×</button></span>';
+      + ' <button aria-label="Quitar tarjeta de '+escapeHtml(t.jugador)+'" onclick="App.removeTarjeta(\''+f.id+'\',\''+p.id+'\','+i+')">×</button></span>';
   }).join('');
   return '<div class="match-admin">'
     + '<div class="row">'
@@ -870,7 +940,7 @@ function render(){
   if(CAN_EDIT) tabsList.push(['admin','Editar']);
 
   var tabsHtml = tabsList.map(function(t){
-    return '<button class="'+(TAB===t[0]?'active':'')+'" onclick="App.setTab(\''+t[0]+'\')">'+t[1]+'</button>';
+    return '<button class="'+(TAB===t[0]?'active':'')+'" role="tab" aria-selected="'+(TAB===t[0]?'true':'false')+'" onclick="App.setTab(\''+t[0]+'\')">'+t[1]+'</button>';
   }).join('');
 
   var content = '';
@@ -893,7 +963,7 @@ function render(){
     + '</div>'
   ) : '';
 
-  var logoHtml = STATE.logo ? ('<img class="hero-logo" src="'+STATE.logo+'" alt="Logo"><div class="hero-divider"></div>') : '';
+  var logoHtml = STATE.logo ? ('<img class="hero-logo" src="'+STATE.logo+'" alt="Logo de '+escapeHtml(STATE.torneo||'Copa El Pibe')+'"><div class="hero-divider"></div>') : '';
 
   var __scrollY = window.scrollY;
 
@@ -901,7 +971,7 @@ function render(){
     + '<div class="pitch-strip"></div>'
     + '<div class="hero"><div class="hero-inner">'+logoHtml+'<div class="hero-text"><h1 class="torneo-name">'+escapeHtml(STATE.torneo||'Campeonato')+'</h1>'
     + '<div class="sub">Posiciones, resultados, próximos partidos, destacados y liguilla</div></div></div>'
-    + '<div class="tabs-wrap"><nav class="tabs">'+tabsHtml+'</nav></div></div>'
+    + '<div class="tabs-wrap"><nav class="tabs" role="tablist" aria-label="Secciones de '+escapeHtml(STATE.torneo||'Copa El Pibe')+'">'+tabsHtml+'</nav></div></div>'
     + '<div class="wrap"><section class="panel'+(tabChanged?' panel-anim':'')+'">'+content+'</section></div>'
     + saveBar
     + renderFooter(STATE);
@@ -959,7 +1029,7 @@ function renderDestacados(state){
   var d = state.destacados || {fecha:null, jugadores:[]};
   var jugadores = d.jugadores || [];
   if(!jugadores.length){
-    return '<p class="empty">Todavía no se cargó el equipo ideal de la fecha. Se agrega desde "Editar".</p>';
+    return emptyMsg('Todavía no se cargó el equipo ideal de la fecha.', 'Se agrega desde la pestaña Editar.');
   }
   var teamObj = {};
   (state.equipos||[]).forEach(function(e){ teamObj[e.id]=e; });
@@ -1016,7 +1086,7 @@ function renderDestacadosAdmin(state){
   var d = state.destacados || {fecha:null, jugadores:[]};
   var rows = (d.jugadores||[]).map(function(j){
     var thumb = j.foto
-      ? '<img src="'+j.foto+'" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid var(--line)">'
+      ? '<img src="'+j.foto+'" alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid var(--line)">'
       : '<span class="avatar-fallback" style="width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px">'+escapeHtml(initials(j.nombre))+'</span>';
     return '<div class="team-edit-row">'
       + '<div class="team-edit-head">'+thumb
@@ -1157,14 +1227,14 @@ window.App = {
     var visitSel = document.getElementById('sel-visit-'+fechaId);
     if(!localSel || !visitSel) return;
     var localId = localSel.value, visitId = visitSel.value;
-    if(!localId || !visitId || localId===visitId){ alert('Elegí dos equipos distintos.'); return; }
+    if(!localId || !visitId || localId===visitId){ showToast('Elegí dos equipos distintos para cargar el partido.', 'error'); return; }
     var usados = {};
     (f.partidos||[]).forEach(function(p){ usados[p.localId]=true; usados[p.visitanteId]=true; });
     if(usados[localId] || usados[visitId]){
       var teamName = {};
       (STATE.equipos||[]).forEach(function(e){ teamName[e.id]=e.nombre; });
       var repetido = usados[localId] ? teamName[localId] : teamName[visitId];
-      alert((repetido||'Ese equipo')+' ya tiene un partido cargado en esta fecha. Un equipo solo puede jugar un partido por fecha.');
+      showToast((repetido||'Ese equipo')+' ya tiene un partido cargado en esta fecha. Un equipo solo puede jugar un partido por fecha.', 'error');
       return;
     }
     f.partidos.push({id: uid('p'), localId: localId, visitanteId: visitId, golesLocal:null, golesVisitante:null, goleadores:[], tarjetas:[]});
@@ -1193,7 +1263,7 @@ window.App = {
     var eqEl = document.getElementById('gol-eq-'+partidoId);
     var cantEl = document.getElementById('gol-cant-'+partidoId);
     var jugador = (jugEl.value||'').trim();
-    if(!jugador) return;
+    if(!jugador){ showToast('Escribí el nombre del jugador antes de agregar el gol.', 'error'); return; }
     p.goleadores.push({jugador: jugador, equipoId: eqEl.value, cantidad: Math.max(1, parseInt(cantEl.value,10)||1)});
     DIRTY = true; render();
   },
@@ -1214,7 +1284,7 @@ window.App = {
     var eqEl = document.getElementById('tar-eq-'+partidoId);
     var tipoEl = document.getElementById('tar-tipo-'+partidoId);
     var jugador = (jugEl.value||'').trim();
-    if(!jugador) return;
+    if(!jugador){ showToast('Escribí el nombre del jugador antes de agregar la tarjeta.', 'error'); return; }
     p.tarjetas.push({jugador: jugador, equipoId: eqEl.value, tipo: tipoEl.value, cantidad:1});
     DIRTY = true; render();
   },
@@ -1236,7 +1306,7 @@ window.App = {
     var valorEl = document.getElementById('input-metodo-valor');
     var nombre = (nombreEl.value||'').trim();
     var valor = (valorEl.value||'').trim();
-    if(!nombre || !valor) return;
+    if(!nombre || !valor){ showToast('Completá el nombre y el valor del método antes de agregarlo.', 'error'); return; }
     STATE.colabora = STATE.colabora || {mensaje:'', metodos:[]};
     STATE.colabora.metodos = STATE.colabora.metodos || [];
     STATE.colabora.metodos.push({nombre:nombre, valor:valor});
@@ -1382,13 +1452,24 @@ window.App = {
   publicar: function(){
     var btns = document.querySelectorAll('.save-bar .btn');
     btns.forEach(function(b){ b.disabled = true; });
+    var okArtifact = true;
     Promise.resolve(window.claude ? claude.use('artifact') : null).then(function(artifact){
-      if(!artifact){ alert('No se pudo conectar con la función de publicación en esta vista.'); btns.forEach(function(b){ b.disabled=false; }); return; }
+      if(!artifact){
+        okArtifact = false;
+        showToast('No se pudo conectar con la función de publicación en esta vista. Probá publicar desde la vista completa de la página.', 'error');
+        btns.forEach(function(b){ b.disabled=false; });
+        return;
+      }
       return artifact.publish(renderDocument(STATE));
+    }).then(function(){
+      if(!okArtifact) return;
+      DIRTY = false;
+      render();
+      showToast('Publicado correctamente. Los cambios ya están disponibles.', 'success');
     }).catch(function(err){
-      if(err && err.code==='not_writer'){ alert('No tenés permisos para editar esta página.'); }
-      else if(err && err.code==='conflict'){ /* la vista se recarga sola */ }
-      else { alert('No se pudo publicar. Probá de nuevo.'); }
+      if(err && err.code==='not_writer'){ showToast('No tenés permisos para editar esta página.', 'error'); }
+      else if(err && err.code==='conflict'){ showToast('Había una versión más nueva publicada; actualizando la página…', 'info'); }
+      else { showToast('No se pudo publicar. Revisá tu conexión y probá de nuevo.', 'error'); }
       btns.forEach(function(b){ b.disabled=false; });
     });
   }
@@ -1404,8 +1485,8 @@ function initLikeWidget(){
 
   var wrap = document.createElement('div');
   wrap.className = 'like-widget';
-  wrap.innerHTML = '<button id="like-btn" class="like-btn" title="Me gusta la Copa El Pibe">'
-    + '<span id="like-heart">'+(isLiked()?'❤️':'🤍')+'</span><span id="like-count">…</span></button>';
+  wrap.innerHTML = '<button id="like-btn" class="like-btn" title="Me gusta la Copa El Pibe" aria-label="Me gusta la Copa El Pibe" aria-pressed="'+(isLiked()?'true':'false')+'">'
+    + '<span id="like-heart" aria-hidden="true">'+(isLiked()?'❤️':'🤍')+'</span><span id="like-count">…</span></button>';
   document.body.appendChild(wrap);
 
   function updateUI(count, liked){
@@ -1413,6 +1494,7 @@ function initLikeWidget(){
     var countEl = document.getElementById('like-count');
     if(heartEl) heartEl.textContent = liked ? '❤️' : '🤍';
     if(countEl) countEl.textContent = (count==null ? '' : count);
+    if(btn) btn.setAttribute('aria-pressed', liked ? 'true' : 'false');
   }
 
   fetch(base + '/likes.json').then(function(r){ return r.json(); }).then(function(val){
