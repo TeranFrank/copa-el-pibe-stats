@@ -76,8 +76,12 @@ h1{font-family:var(--font-display); font-weight:400; letter-spacing:.01em; margi
 .hero-divider{width:1px;align-self:stretch;min-height:52px;background:linear-gradient(var(--line), transparent);flex:none;}
 .hero-text{min-width:0;}
 .hero .torneo-name{font-size:clamp(28px,6vw,52px);text-transform:uppercase;letter-spacing:.015em;margin:0 0 6px;line-height:1.02;word-break:break-word;}
-.hero .sub{color:var(--muted);font-family:var(--font-sans);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.09em;display:flex;align-items:center;gap:8px;padding-bottom:22px;}
+.hero .sub{color:var(--muted);font-family:var(--font-sans);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.09em;display:flex;align-items:center;gap:8px;padding-bottom:14px;}
 .hero .sub::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(var(--accent-rgb),.65);flex:none;}
+.resumen-strip{display:flex;flex-wrap:wrap;gap:18px 26px;padding-bottom:8px;}
+.resumen-item{display:flex;align-items:baseline;gap:7px;}
+.resumen-item .resumen-value{font-family:var(--font-heading);font-size:21px;font-weight:800;color:var(--text);}
+.resumen-item .resumen-label{font-family:var(--font-sans);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
 .tabs-wrap{position:relative;border-top:1px solid var(--line);}
 .tabs-wrap::after{content:'';position:absolute;top:0;right:0;bottom:0;width:28px;background:linear-gradient(90deg, transparent, var(--bg));pointer-events:none;opacity:1;transition:opacity .2s ease;}
 .tabs-wrap.at-end::after{opacity:0;}
@@ -153,9 +157,19 @@ html.is-desktop-html .name-mobile{display:none;}
 .proximo-vs{font-family:var(--font-heading);font-size:13px;color:var(--accent);font-weight:700;}
 .cruce-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-md);padding:var(--space-3) var(--space-2);display:flex;align-items:center;justify-content:center;gap:14px;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
 .cruce-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.35);border-color:var(--accent-deep);}
-.cruce-team{display:flex;flex-direction:column;align-items:center;gap:6px;}
-.cruce-team .seed{font-family:var(--font-heading);font-size:11px;color:var(--muted);letter-spacing:.04em;}
-.cruce-vs{font-family:var(--font-heading);font-size:12px;color:var(--accent);font-weight:600;}
+.cruce-card.chica{border-color:rgba(var(--yellow-rgb),.4);}
+.cruce-card.chica:hover{border-color:var(--yellow);}
+.cruce-team{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;min-width:0;}
+.cruce-team .seed{font-family:var(--font-heading);font-size:11px;color:var(--bg);letter-spacing:.04em;background:var(--accent);border-radius:999px;padding:1px 9px;font-weight:700;}
+.cruce-card.chica .cruce-team .seed{background:var(--yellow);}
+.cruce-team .cruce-name{font-family:var(--font-heading);font-size:13px;font-weight:600;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px;}
+.cruce-vs{font-family:var(--font-heading);font-size:12px;color:var(--accent);font-weight:600;flex:none;}
+.liguilla-section{margin-bottom:var(--space-4);}
+.liguilla-section .fecha-title{border-left:4px solid var(--accent);padding-left:10px;}
+.liguilla-section.chica .fecha-title{border-left-color:var(--yellow);}
+.liguilla-status{font-family:var(--font-sans);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:inline-flex;align-items:center;gap:5px;margin-bottom:var(--space-2);}
+.liguilla-status.listo{color:var(--accent);}
+.liguilla-note{color:var(--muted);padding:14px 16px;font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);line-height:1.5;margin-top:var(--space-2);}
 .colabora-hero{background:linear-gradient(135deg, var(--panel), var(--panel-2));border:1px solid var(--line);border-radius:var(--radius-md);padding:var(--space-5) var(--space-4);margin-bottom:var(--space-3);text-align:center;}
 .destacados-pitch{position:relative;overflow:hidden;background:repeating-linear-gradient(180deg,var(--pitch-green-1) 0px,var(--pitch-green-1) 44px,var(--pitch-green-2) 44px,var(--pitch-green-2) 88px);border:3px solid rgba(255,255,255,.5);border-radius:var(--radius-lg);padding:40px 16px 34px;display:flex;flex-direction:column;gap:44px;align-items:center;box-shadow:inset 0 0 40px rgba(0,0,0,.35);}
 .pitch-marking{position:absolute;pointer-events:none;z-index:0;}
@@ -359,7 +373,9 @@ input[type=number]{width:60px;text-align:center;font-family:var(--font-mono);}
   .hero-inner{gap:14px;}
   .hero-logo{width:60px;height:60px;border-width:2px;box-shadow:0 0 0 4px rgba(var(--accent-rgb),.14),0 8px 18px rgba(0,0,0,.4);}
   .hero-divider{display:none;}
-  .hero .sub{font-size:11px;letter-spacing:.07em;padding-bottom:16px;}
+  .hero .sub{font-size:11px;letter-spacing:.07em;padding-bottom:10px;}
+  .resumen-strip{gap:12px 18px;}
+  .resumen-item .resumen-value{font-size:18px;}
 }
 @media (max-width:420px){
   th,td{padding:7px 5px;}
@@ -497,6 +513,15 @@ function computeStandings(state){
     return a.nombre.localeCompare(b.nombre);
   });
   return arr;
+}
+
+function computeResumen(state){
+  var equipos = (state.equipos||[]).length;
+  var standings = computeStandings(state);
+  var partidosJugados = 0, golesTotales = 0;
+  standings.forEach(function(t){ partidosJugados += (t.pj||0); golesTotales += (t.gf||0); });
+  partidosJugados = partidosJugados / 2;
+  return {equipos: equipos, partidosJugados: partidosJugados, golesTotales: golesTotales};
 }
 
 function computeScorers(state){
@@ -775,13 +800,15 @@ function fechaDateLabel(numero, state){
   return dias[d.getDay()] + ' ' + d.getDate() + ' de ' + meses[d.getMonth()];
 }
 
-function renderCruce(teamObj, rowA, seedA, rowB, seedB){
+function renderCruce(teamObj, rowA, seedA, rowB, seedB, variant){
   var teamA = rowA ? teamObj[rowA.id] : null;
   var teamB = rowB ? teamObj[rowB.id] : null;
-  return '<div class="cruce-card">'
-    + '<div class="cruce-team"><span class="seed">'+seedA+'°</span>'+teamAvatar(teamA,'team-logo-lg')+'</div>'
+  var nameA = teamA ? (teamA.nombreCorto || teamA.nombre) : '?';
+  var nameB = teamB ? (teamB.nombreCorto || teamB.nombre) : '?';
+  return '<div class="cruce-card'+(variant?' '+variant:'')+'">'
+    + '<div class="cruce-team"><span class="seed">'+seedA+'°</span>'+teamAvatar(teamA,'team-logo-lg')+'<span class="cruce-name">'+escapeHtml(nameA)+'</span></div>'
     + '<div class="cruce-vs">VS</div>'
-    + '<div class="cruce-team"><span class="seed">'+seedB+'°</span>'+teamAvatar(teamB,'team-logo-lg')+'</div>'
+    + '<div class="cruce-team"><span class="seed">'+seedB+'°</span>'+teamAvatar(teamB,'team-logo-lg')+'<span class="cruce-name">'+escapeHtml(nameB)+'</span></div>'
     + '</div>';
 }
 
@@ -797,11 +824,13 @@ function renderLiguilla(state){
   var small = standings.slice(8);
   var html = '';
 
-  html += '<h3 class="fecha-title">Liguilla grande (1° al 8°)</h3>';
+  html += '<div class="liguilla-section grande">';
+  html += '<h3 class="fecha-title">🏆 Liguilla grande <span class="fecha-date">— puestos 1° al 8°</span></h3>';
   if(big.length < 8){
     html += '<p class="empty">Se arma cuando haya al menos 8 equipos en la tabla (hay '+standings.length+').</p>';
   } else {
     var sorteo = (state.liguillaSorteo && state.liguillaSorteo.length===8) ? state.liguillaSorteo : null;
+    html += '<div class="liguilla-status'+(sorteo?' listo':'')+'">'+(sorteo?'✓ Cruces sorteados':'🕒 Pendiente de sorteo')+'</div>';
     html += '<div class="row" style="margin-bottom:var(--space-2)"><button class="btn secondary" onclick="App.sortearLiguilla()">🎲 '+(sorteo ? 'Volver a sortear cruces' : 'Sortear cruces')+'</button></div>';
     if(!sorteo){
       html += '<p class="empty">Todavía no se sortearon los cruces de la liguilla grande.</p>';
@@ -812,15 +841,18 @@ function renderLiguilla(state){
       }).join('') + '</div>';
     }
   }
+  html += '</div>';
 
-  html += '<h3 class="fecha-title" style="margin-top:26px">Liguilla chica (9° y 10°)</h3>';
+  html += '<div class="liguilla-section chica">';
+  html += '<h3 class="fecha-title">🥈 Liguilla chica <span class="fecha-date">— puestos 9° en adelante</span></h3>';
   if(small.length < 2){
     html += '<p class="empty">Se arma cuando haya al menos 10 equipos en la tabla.</p>';
   } else {
-    html += '<div class="bracket-grid">' + renderCruce(teamObj, small[0], 9, small[small.length-1], 8+small.length) + '</div>';
+    html += '<div class="bracket-grid">' + renderCruce(teamObj, small[0], 9, small[small.length-1], 8+small.length, 'chica') + '</div>';
   }
+  html += '</div>';
 
-  html += '<p class="empty" style="padding-top:18px">La liguilla grande se arma por sorteo entre los 8 primeros de la tabla. La liguilla chica se arma según la posición actual. Los cruces pueden cambiar hasta que termine la fase de liga.</p>';
+  html += '<p class="liguilla-note">La liguilla grande se arma por sorteo entre los 8 primeros de la tabla. La liguilla chica se arma según la posición actual. Los cruces pueden cambiar hasta que termine la fase de liga.</p>';
   return html;
 }
 
@@ -1007,12 +1039,23 @@ function render(){
 
   var logoHtml = STATE.logo ? ('<img class="hero-logo" src="'+STATE.logo+'" alt="Logo de '+escapeHtml(STATE.torneo||'Copa El Pibe')+'"><div class="hero-divider"></div>') : '';
 
+  var resumen = computeResumen(STATE);
+  var resumenItems = [];
+  if(resumen.equipos > 0){
+    resumenItems.push('<div class="resumen-item"><span class="resumen-value">'+resumen.equipos+'</span><span class="resumen-label">Equipos</span></div>');
+  }
+  if(resumen.partidosJugados > 0){
+    resumenItems.push('<div class="resumen-item"><span class="resumen-value">'+resumen.partidosJugados+'</span><span class="resumen-label">Partidos jugados</span></div>');
+    resumenItems.push('<div class="resumen-item"><span class="resumen-value">'+resumen.golesTotales+'</span><span class="resumen-label">Goles</span></div>');
+  }
+  var resumenHtml = resumenItems.length ? ('<div class="resumen-strip">'+resumenItems.join('')+'</div>') : '';
+
   var __scrollY = window.scrollY;
 
   document.getElementById('root').innerHTML = ''
     + '<div class="pitch-strip"></div>'
     + '<div class="hero"><div class="hero-inner">'+logoHtml+'<div class="hero-text"><h1 class="torneo-name">'+escapeHtml(STATE.torneo||'Campeonato')+'</h1>'
-    + '<div class="sub">Posiciones, resultados, próximos partidos, destacados y liguilla</div></div></div>'
+    + '<div class="sub">Posiciones, resultados, próximos partidos, destacados y liguilla</div>'+resumenHtml+'</div></div>'
     + '<div class="tabs-wrap"><nav class="tabs" role="tablist" aria-label="Secciones de '+escapeHtml(STATE.torneo||'Copa El Pibe')+'">'+tabsHtml+'</nav></div></div>'
     + '<div class="wrap"><section class="panel'+(tabChanged?' panel-anim':'')+'">'+content+'</section></div>'
     + saveBar
